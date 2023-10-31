@@ -26,10 +26,10 @@ jobs:
           aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-west-1.amazonaws.com
           rev=$(git rev-parse --short HEAD)
           docker build . -t mama014hello
-          docker tag mama014hello 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014:$rev
-          docker tag mama014hello 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014:latest
-          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014:$rev
-          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014:latest
+          docker tag mama014hello 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:$rev
+          docker tag mama014hello 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:latest
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:$rev
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:latest
 
   terraform:
     name: "Terraform"
@@ -62,4 +62,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var="prefix=mama014" -var="image=244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014:latest" -auto-approve
+        run: terraform apply -var="prefix=mama014" -var="image=244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:latest" -auto-approve
