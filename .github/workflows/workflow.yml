@@ -56,10 +56,15 @@ jobs:
           terraform init
 
       - name: Terraform Plan Module
+        id: plan2
         run: |
           cd infra/alarm_module
           terraform plan -no-color
-        continue-on-error: false
+        continue-on-error: true
+
+      - name: Terraform Plan Module Status
+        if: steps.plan2.outcome == 'failure'
+        run: exit 1
 
       - name: Terraform Apply Module
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
