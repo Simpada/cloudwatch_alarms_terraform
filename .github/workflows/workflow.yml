@@ -47,6 +47,9 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
+      - name: List contents of the working directory
+        run: ls /infra
+
       - name: Terraform Init
         id: init
         run: terraform init
