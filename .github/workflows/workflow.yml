@@ -59,7 +59,7 @@ jobs:
         id: plan
         run:  |
           cd infra
-          terraform plan -no-color
+          terraform plan -var="prefix=$PREFIX" -var="image=$IMAGE" -no-color
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -70,4 +70,4 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
           cd infra
-          terraform apply -var="prefix=mama014" -var="image=244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:latest" -auto-approve
+          terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE" -auto-approve
