@@ -41,14 +41,14 @@ jobs:
       AWS_REGION: eu-west-1
       IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/mama014-private:latest
       PREFIX: mama014
-      working-directory: /infra
+      working-directory: infra
     steps:
       - uses: actions/checkout@v3
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
       - name: List contents of the working directory
-        run: ls
+        run: ls infra
 
       - name: Terraform Init
         id: init
