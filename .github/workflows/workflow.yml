@@ -70,7 +70,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
           cd infra/alarm_module
-          terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE" -auto-approve
+          terraform apply -var="prefix=$PREFIX" -auto-approve
 
       - name: Terraform Plan
         id: plan
