@@ -57,16 +57,14 @@ jobs:
 
       - name: Terraform Plan Module
         run: |
-          cd infra
-          cd alarm_module
+          cd infra/alarm_module
           terraform plan -no-color
         continue-on-error: false
 
       - name: Terraform Apply Module
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:  |
-          cd infra
-          cd alarm_module
+          cd infra/alarm_module
           terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE" -auto-approve
 
       - name: Terraform Plan
